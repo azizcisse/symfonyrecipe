@@ -24,7 +24,7 @@ class UserController extends AbstractController
      * @param EntityManagerInterface $manager
      * @return Response
      */
-    #[Route('/utilisateur/edition/{id}', name:'user.edtion', methods:['GET', 'POST'])]
+    #[Route('/utilisateur/edition/{id}', name:'user.edition', methods:['GET', 'POST'])]
 function edit(User $user, Request $request, EntityManagerInterface $manager): Response
     {
     if (!$this->getUser()) {
@@ -73,7 +73,7 @@ function edit(User $user, Request $request, EntityManagerInterface $manager): Re
      * @return Response
      */
    //#[Security("is_granted('ROLE_USER') and user === choosenUser")]
-    #[Route('/utilisateur/edition-mot-de-passe/{id}', 'user.edit.password', methods: ['GET', 'POST'])]
+    #[Route('/utilisateur/edition-mot-de-passe/{id}', name:'user.edit.password', methods: ['GET', 'POST'])]
     public function editPassword(
         User $user,
         Request $request,

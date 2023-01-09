@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/deconnexion', 'app_logout')]
+    #[Route('/deconnexion', name:'app_logout')]
     /**
      * Pour la déconnexion de l'utilisateur
      *
