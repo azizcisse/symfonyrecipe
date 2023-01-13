@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  SymfonyRecipe - {{ recipe.name }}
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    {% for message in app.flashes('success') %}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <h3 class="mt-4">
+      {{ recipe.name }}
+    <p>
+      La Moyenne de cette Recette est de {{ recipe.average|number_format('2', '.', ',')  }} /5
+    </p>
+    <div>
+      <span class="badge bg-primary mt-4">
+        Créée le
+        {{ recipe.createdAt|date('d/m/y') }}
+      </span>
+    </div>
+
+    {% if recipe.time %}
+      <p class="mt-4">
+        Temps (en Minute) :
+        {{ recipe.time }}
+      </p>
+    {% else %}
+      <p>
+        Temps Non Renseigné
+      </p>
+    {% endif %}
+
+    {% if recipe.nbPeople %}
+      <p class="mt-4">
+        Pour
+        {{ recipe.nbPeople }} personnes
+      </p>
+    {% else %}
+      <p>
+        Nombre de personnes non disponible
+      </p>
+    {% endif %}
+
+    {% if recipe.difficulty %}
+      <p class="mt-4">
+        Difficulté
+        {{ recipe.difficulty }} / 5
+      </p>
+    {% else %}
+      <p>
+        Difficulté Non Renseigné
+      </p>
+    {% endif %}
+
+    {% if recipe.price %}
+      <p class="mt-4">
+        Prix (en €) :
+        {{ recipe.price }}
+      </p>
+    {% else %}
+      <p>
+        Prix Non Renseigné
+      </p>
+    {% endif %}
+
+    <div class="mt-4">
+      {{ recipe.description|raw }}
+    </div>
+
+    <div class="mt-4">
+      <p class="mt-4">
+        Ingrédients
+      </p>
+      {% for ingredient in recipe.ingredients %}
+        <span class="badge bg-primary">{{ ingredient.name }}</span>
+      {% endfor %}
+    </div>
+    <div class="mark">
+      {{ form(form) }}
+    </div>
+  </div>
+{% endblock %}

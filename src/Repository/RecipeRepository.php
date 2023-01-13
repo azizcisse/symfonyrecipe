@@ -38,4 +38,22 @@ class RecipeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * Undocumented function
+     *
+     * @param integer $nbRecipes
+     * @return array
+     */
+    public function findPublicRecipe(?int $nbRecipes): array
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.isPublic = 1')
+            ->orderBy('r.createdAt', 'DESC');
+
+        if ($nbRecipes !== 0 || !$nbRecipes !== null) {
+            $queryBuilder->setMaxResults($nbRecipes);
+        }
+        return $queryBuilder->getQuery()
+            ->getResult();
+    }
 }
